@@ -5,6 +5,24 @@ export default class Birds extends Component {
     birds: []
   };
 
+  //   function addTally() {
+
+  //   }
+
+  // addButton.addEventListener('click', function() {
+  //     object.sightings += 1
+  //     sightings.textContent = 'Sightings: ' + object.sightings
+  // })
+
+  // minusButton.addEventListener('click', function() {
+  //     if (object.sightings > 0) {
+  //         object.sightings -= 1
+  //     } else {
+  //         object.sightings = 0
+  //     }
+  //     sightings.textContent = 'Sightings: ' + object.sightings
+  // })
+
   componentDidMount() {
     return fetch('https://wildwatcher.herokuapp.com/birds')
       .then(response => response.json())
