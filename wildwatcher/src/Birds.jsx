@@ -39,7 +39,7 @@ export default class Birds extends Component {
     if (birds && birds.length > 0) {
       birdsView = birds.map(bird => {
         return (
-          <div className="row">
+          <div className="row" key={bird.id}>
             <div className="col s12 m7">
               <div className="card">
                 <div className="card-image">
