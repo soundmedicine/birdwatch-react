@@ -4,12 +4,13 @@ import Nav from './Nav';
 import Birds from './Birds';
 import Turtles from './Turtles';
 import Form from './Form';
+// import Chart from './Chart';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      toggle: false
+      toggle: true
     };
   }
 
@@ -32,6 +33,7 @@ class App extends Component {
           toggleSearch={this.toggleViewSearch}
           toggleAdd={this.toggleViewAdd}
         />
+        {/* <Chart /> */}
         {this.state.toggle && <Birds />}
         {this.state.toggle && <Turtles />}
         {!this.state.toggle && <Form />}

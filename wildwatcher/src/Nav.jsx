@@ -12,13 +12,18 @@ export default class Nav extends Component {
         <div className="nav-content center">
           <ul className="tabs tabs-transparent">
             <li className="tab amber-text text-darken-4">
-              <a href="Form.jsx" onClick={this.props.toggleSearch}>
+              <a onClick={this.props.toggleSearch}>
                 Search
               </a>
             </li>
             <li className="tab amber-text text-darken-4">
-              <a href="Form.jsx" onClick={this.props.toggleAdd}>
+              <a onClick={this.props.toggleAdd}>
                 Add Animal
+              </a>
+            </li>
+            <li className="tab amber-text text-darken-4">
+              <a onClick={this.props.toggleSearch}>
+                Sightings
               </a>
             </li>
           </ul>

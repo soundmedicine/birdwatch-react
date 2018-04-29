@@ -6,47 +6,64 @@ export default class Form extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const form = new FormData(e.target);
+  postFormData() {
+    const postUrl = 'https://wildwatcher.herokuapp.com/birds';
+    let muhForm = document.querySelector('#add-form');
+    const form = new FormData(muhForm);
     const payload = {
       commonName: form.get('commonName'),
       scientificName: form.get('scientificName'),
       fact: form.get('fact')
     };
-    console.log(payload);
-    // this.props.onSave({ ...this.state });
-    // this.setState({
-    //   commonName: '',
-    //   scientificName: '',
-    //   image: '',
-    //   fact: '',
-    //   sightings: 0
-    // });
+    let dataYas = JSON.stringify(payload);
+    console.log(dataYas, "dataYas");
+    fetch(postUrl, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: dataYas
+    })
+      .then(response => response.json())
+      .catch(err => console.log(err));
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.postFormData();
   };
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  _onClick(e) {
+    console.log(e.target.value);
+    
+  }
+
   render() {
     return (
-      <form action="submit" className="add-form">
+      <form id="add-form" action="submit" onSubmit={this.handleSubmit} className="add-form">
         <label htmlFor="commonName">Common Name</label>
         <input type="text" name="commonName" onChange={this.handleChange} />
         <label htmlFor="scientificName">Scientific Name</label>
         <input type="text" name="scientificName" onChange={this.handleChange} />
-        <label htmlFor="fact" name="fact" onChange={this.handleChange}>
-          Notes
-        </label>
-        <textarea name="fact" id="" cols="30" rows="10" />
+        <label htmlFor="fact">Fact</label>
+        <textarea
+          name="fact"
+          cols="30"
+          rows="10"
+          onChange={this.handleChange}
+        />
         <input
           type="submit"
           name="submit"
           value="Submit"
-          onClick={this.handleSubmit}
         />
       </form>
     );
