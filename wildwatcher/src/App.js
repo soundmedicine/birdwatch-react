@@ -51,7 +51,6 @@ export default class App extends Component {
       toggleSearch: false,
       toggleChart: false
     });
-    console.log('ADD')
   };
 
   toggleViewSearch = () => {
@@ -60,7 +59,6 @@ export default class App extends Component {
       toggleSearch: true,
       toggleChart: false
     });
-    console.log('SEARCH')
   };
 
   toggleViewChart = () => {
@@ -69,7 +67,6 @@ export default class App extends Component {
       toggleSearch: false,
       toggleChart: true
     });
-    console.log('CHART')
   }
 
   render() {

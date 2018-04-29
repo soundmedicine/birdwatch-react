@@ -5,6 +5,7 @@
   "dependencies": {
     "ajv": "^6.4.0",
     "chart.js": "^2.7.2",
+    "cypress": "^2.1.0",
     "fusioncharts": "^3.12.2",
     "react": "^16.3.2",
     "react-chartjs-2": "^2.7.0",

@@ -4,25 +4,7 @@ export default class Birds extends Component {
   state = {
     birds: []
   };
-
-  //   function addTally() {
-
-  //   }
-
-  // addButton.addEventListener('click', function() {
-  //     object.sightings += 1
-  //     sightings.textContent = 'Sightings: ' + object.sightings
-  // })
-
-  // minusButton.addEventListener('click', function() {
-  //     if (object.sightings > 0) {
-  //         object.sightings -= 1
-  //     } else {
-  //         object.sightings = 0
-  //     }
-  //     sightings.textContent = 'Sightings: ' + object.sightings
-  // })
-
+  
   componentDidMount() {
     return fetch('https://wildwatcher.herokuapp.com/birds')
       .then(response => response.json())
@@ -31,6 +13,10 @@ export default class Birds extends Component {
           birds: birds.birds
         })
       );
+  }
+
+  onClick = (e) => {
+    console.log(this.state.birds)
   }
 
   render() {
@@ -50,7 +36,7 @@ export default class Birds extends Component {
                   <p>{bird.fact}</p>
                   <p>Sightings: {bird.sightings}</p>
                   <p>Scientific Name: {bird.scientificName}</p>
-                  <a className="btn-floating halfway-fab waves-effect waves-light red">
+                  <a onClick={this.onClick} className="btn-floating halfway-fab waves-effect waves-light red">
                     <i className="material-icons">add</i>
                   </a>
                 </div>
@@ -62,14 +48,6 @@ export default class Birds extends Component {
     }
 
     return <Fragment>{birdsView}</Fragment>;
-    //   <Card
-    //     className="small"
-    //     header={<CardTitle image="img/sample-1.jpg">Card Title</CardTitle>}
-    //     actions={[<a href="#">This is a Link</a>]}
-    //   >
-    //     I am a very simple card. I am good at containing small bits of
-    //     information. I am convenient because I require little markup to use
-    //     effectively.
-    //   </Card>
+
   }
 }
