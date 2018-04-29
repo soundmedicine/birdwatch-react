@@ -22,7 +22,7 @@ export default class Nav extends Component {
               </a>
             </li>
             <li className="tab amber-text text-darken-4">
-              <a onClick={this.props.toggleSearch}>
+              <a onClick={this.props.toggleChart}>
                 Sightings
               </a>
             </li>

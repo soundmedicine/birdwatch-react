@@ -25,7 +25,7 @@ export default class Chart extends Component {
                         title: {
                             display: this.props.displayTitle,
                             text: 'WildWatch Sightings',
-                            fontSize: 25,
+                            fontSize: 25
                             
                         },
                         legend: {

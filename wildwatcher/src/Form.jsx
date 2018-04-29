@@ -11,15 +11,17 @@ export default class Form extends Component {
 
   postFormData() {
     const postUrl = 'https://wildwatcher.herokuapp.com/birds';
-    let muhForm = document.querySelector('#add-form');
-    const form = new FormData(muhForm);
+    let myForm = document.querySelector('#add-form');
+    const form = new FormData(myForm);
     const payload = {
       commonName: form.get('commonName'),
       scientificName: form.get('scientificName'),
-      fact: form.get('fact')
+      fact: form.get('fact'),
+      sightings: 0
     };
     let dataYas = JSON.stringify(payload);
-    console.log(dataYas, "dataYas");
+    console.log(dataYas)
+    
     fetch(postUrl, {
       method: 'POST',
       headers: {
@@ -32,20 +34,21 @@ export default class Form extends Component {
       .catch(err => console.log(err));
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.postFormData();
+    e.target.reset();
   };
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   _onClick(e) {
     console.log(e.target.value);
-    
+    this.setState({ [e.target.name]: ''})
   }
-
+  
   render() {
     return (
       <form id="add-form" action="submit" onSubmit={this.handleSubmit} className="add-form">

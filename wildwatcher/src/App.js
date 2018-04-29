@@ -10,7 +10,7 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      toggle: true,
+      toggle: 'search',
       chartData: {}
     };
   }
@@ -43,19 +43,26 @@ export default class App extends Component {
       })
     }
 
-
-
   toggleViewAdd = () => {
     this.setState({
-      toggle: false
+      toggle: 'add'
     });
+    console.log('ADD')
   };
 
   toggleViewSearch = () => {
     this.setState({
-      toggle: true
+      toggle: 'search'
     });
+    console.log('SEARCH')
   };
+
+  toggleViewChart = () => {
+    this.setState({
+      toggle: 'chart'
+    });
+    console.log('CHART')
+  }
 
   render() {
     return (
@@ -63,11 +70,12 @@ export default class App extends Component {
         <Nav
           toggleSearch={this.toggleViewSearch}
           toggleAdd={this.toggleViewAdd}
+          toggleChart={this.toggleViewChart}
         />
         {this.state.toggle && <Birds />}
         {this.state.toggle && <Turtles />}
-        {!this.state.toggle && <Form />}
-        <Chart chartData={this.state.chartData} legendPosition="bottom"/>
+        {this.state.toggle && <Form />}
+        {this.state.toggle && <Chart chartData={this.state.chartData} legendPosition="bottom"/>}
       </div>
     );
   }
