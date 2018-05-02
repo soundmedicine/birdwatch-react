@@ -1,9 +1,15 @@
 import React, { Component, Fragment } from 'react';
 
 export default class Birds extends Component {
-  state = {
-    birds: []
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      birds: [],
+      birdSighting: 0
+    };
+
+    this.onClick = this.onClick.bind(this)
+  }  
   
   componentDidMount() {
     return fetch('https://wildwatcher.herokuapp.com/birds')
@@ -16,8 +22,22 @@ export default class Birds extends Component {
   }
 
   onClick = (e) => {
-    console.log(this.state.birds)
+
+    console.log('Event: ', e.target.id)
+
+    let bird = this.state.birds.filter(bird =>
+    bird.commonName === e.target.id)
+    bird[0].sightings ++
+    
+    this.setState({
+      birdSighting: bird[0].sightings
+    })
+    // console.log(this.state.birds[0].sightings)
+
+    
   }
+
+
 
   render() {
     let birdsView = <div className="row">Loading...</div>;
@@ -36,8 +56,8 @@ export default class Birds extends Component {
                   <p>{bird.fact}</p>
                   <p>Sightings: {bird.sightings}</p>
                   <p>Scientific Name: {bird.scientificName}</p>
-                  <a onClick={this.onClick} className="btn-floating halfway-fab waves-effect waves-light red">
-                    <i className="material-icons">add</i>
+                  <a className="btn-floating halfway-fab waves-effect waves-light red">
+                    <i onClick={this.onClick} id={bird.commonName} className="material-icons">add</i>
                   </a>
                 </div>
               </div>
