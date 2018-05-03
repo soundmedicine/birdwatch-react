@@ -3,41 +3,14 @@ import React, { Component, Fragment } from 'react';
 export default class Birds extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      birds: [],
-      birdSighting: 0
-    };
-    this.onClick = this.onClick.bind(this)
-  }  
+  }
   
-  componentDidMount() {
-    return fetch('https://wildwatcher.herokuapp.com/birds')
-      .then(response => response.json())
-      .then(birds =>
-        this.setState({
-          birds: birds.birds
-        })
-      );
-  }
-
-  onClick = (e) => {
-    e.preventDefault()
-    console.log('Event: ', e.target.id)
-
-    let bird = this.state.birds.filter(bird =>
-    bird.commonName === e.target.id)
-    bird[0].sightings ++
-    
-    this.setState({
-      birdSighting: bird[0].sightings
-    })    
-  }
-
   render() {
     let birdsView = <div className="row">Loading...</div>;
-    const { birds } = this.state;
+    const { birds } = this.props
     if (birds && birds.length > 0) {
       birdsView = birds.map(bird => {
+        console.log(bird)
         return (
           <div className="row" key={bird.id}>
             <div className="col s12 m7">
@@ -51,7 +24,7 @@ export default class Birds extends Component {
                   <p>Sightings: {bird.sightings}</p>
                   <p>Scientific Name: {bird.scientificName}</p>
                   <a className="btn-floating halfway-fab waves-effect waves-light red">
-                    <i onClick={this.onClick} id={bird.commonName} className="material-icons">add</i>
+                    <i onClick={this.props.onBirdClick} id={bird.commonName} className="material-icons">add</i>
                   </a>
                 </div>
               </div>
