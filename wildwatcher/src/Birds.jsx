@@ -7,7 +7,6 @@ export default class Birds extends Component {
       birds: [],
       birdSighting: 0
     };
-
     this.onClick = this.onClick.bind(this)
   }  
   
@@ -22,7 +21,7 @@ export default class Birds extends Component {
   }
 
   onClick = (e) => {
-
+    e.preventDefault()
     console.log('Event: ', e.target.id)
 
     let bird = this.state.birds.filter(bird =>
@@ -31,13 +30,8 @@ export default class Birds extends Component {
     
     this.setState({
       birdSighting: bird[0].sightings
-    })
-    // console.log(this.state.birds[0].sightings)
-
-    
+    })    
   }
-
-
 
   render() {
     let birdsView = <div className="row">Loading...</div>;
@@ -66,8 +60,6 @@ export default class Birds extends Component {
         );
       });
     }
-
     return <Fragment>{birdsView}</Fragment>;
-
   }
 }
