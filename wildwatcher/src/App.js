@@ -23,7 +23,7 @@ export default class App extends Component {
     fetch('https://wildwatcher.herokuapp.com/birds')
       .then(response => response.json())
       .then(birds => {
-        console.log(birds.birds)
+        // console.log(birds.birds)
         this.setState({
           birds: birds.birds
         })
@@ -32,7 +32,7 @@ export default class App extends Component {
 
   addBirds() {
     let totalSightings = this.state.birds.reduce((acc, curr) => {
-      console.log(acc, curr)
+      // console.log(acc, curr)
       return acc += curr.sightings
     }, 0)
     return totalSightings    
@@ -63,10 +63,6 @@ export default class App extends Component {
       e.preventDefault()
       let tally = this.addBirds()
       console.log('Event: ', e.target.id)
-  
-      // let bird = this.state.birds.filter(bird =>
-      // bird.commonName === e.target.id)
-      // // let birdSighting = bird[0].sightings ++
       
       let newBirds = [...this.state.birds]
       let bird = newBirds.filter(bird =>
@@ -78,7 +74,6 @@ export default class App extends Component {
       
       newChartData.datasets[0].data[0]= tally
       this.setState({
-        // birdSighting: bird[0].sightings,
         chartData: newChartData
       })    
     }

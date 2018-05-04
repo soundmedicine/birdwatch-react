@@ -1,16 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react'
 
 export default class Birds extends Component {
-  constructor(props) {
-    super(props)
-  }
   
   render() {
-    let birdsView = <div className="row">Loading...</div>;
+    let birdsView = <div className="row">Loading...</div>
     const { birds } = this.props
     if (birds && birds.length > 0) {
       birdsView = birds.map(bird => {
-        console.log(bird)
+        
         return (
           <div className="row" key={bird.id}>
             <div className="col s12 m7">
@@ -30,9 +27,9 @@ export default class Birds extends Component {
               </div>
             </div>
           </div>
-        );
-      });
+        )
+      })
     }
-    return <Fragment>{birdsView}</Fragment>;
+    return <Fragment>{birdsView}</Fragment>
   }
 }
