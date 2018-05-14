@@ -24,6 +24,7 @@ export default class App extends Component {
     fetch('https://wildwatcher.herokuapp.com/birds')
       .then(res => res.json())
       .then(birds => {
+        console.log(birds)
         this.setState({
           birds: birds.birds
         })
@@ -78,12 +79,19 @@ export default class App extends Component {
     })    
   }
 
-  deleteBird(id) {
-    console.log(id)
-  
+  deleteBird(id) {  
     return fetch('https://wildwatcher.herokuapp.com/birds/' + id, {
       method: 'DELETE'
     }).then(response => response.json())
+      .then(response => {
+      let newBirds = this.state.birds.filter(bird => {
+        return bird.id !== id
+      })
+
+      this.setState({
+        birds: newBirds
+      })
+    })
     .catch(err => console.log(err))
   }
 
@@ -94,6 +102,7 @@ export default class App extends Component {
     bird.commonName === e.target.id)
     
     this.deleteBird(bird[0].id)
+    console.log(this.state.birds)
   }
 
   toggleViewAdd = () => {

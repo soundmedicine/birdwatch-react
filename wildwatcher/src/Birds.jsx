@@ -22,7 +22,7 @@ export default class Birds extends Component {
                 <div className="card-content">
                   <p>{bird.fact}</p>
                   <p>Sightings: {bird.sightings}</p>
-                  <p>Scientific Name: {bird.scientificName}</p>
+                  <p id="scientificName">Scientific Name: {bird.scientificName}</p>
                   <a className="btn-floating halfway-fab waves-effect waves-light red">
                     <i onClick={this.props.onDeleteClick} id={bird.commonName} className="material-icons">delete</i>
                   </a>
