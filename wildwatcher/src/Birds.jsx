@@ -14,6 +14,9 @@ export default class Birds extends Component {
               <div className="card">
                 <div className="card-image">
                   <img src={bird.image} alt={bird.fact} />
+                  <a className="btn-floating halfway-fab waves-effect waves-light blue">
+                    <i onClick={this.props.onBirdClick} id={bird.commonName} className="material-icons">add</i>
+                    </a>
                   <span className="card-title">{bird.commonName}</span>
                 </div>
                 <div className="card-content">
@@ -21,7 +24,7 @@ export default class Birds extends Component {
                   <p>Sightings: {bird.sightings}</p>
                   <p>Scientific Name: {bird.scientificName}</p>
                   <a className="btn-floating halfway-fab waves-effect waves-light red">
-                    <i onClick={this.props.onBirdClick} id={bird.commonName} className="material-icons">add</i>
+                    <i onClick={this.props.onDeleteClick} id={bird.commonName} className="material-icons">delete</i>
                   </a>
                 </div>
               </div>

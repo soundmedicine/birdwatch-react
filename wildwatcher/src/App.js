@@ -16,14 +16,14 @@ export default class App extends Component {
       chartData: {},
       birds: []
     }
+    this.onDeleteClick = this.onDeleteClick.bind(this)
   }
 
   componentDidMount() {
     this.getChartData()
     fetch('https://wildwatcher.herokuapp.com/birds')
-      .then(response => response.json())
+      .then(res => res.json())
       .then(birds => {
-        // console.log(birds.birds)
         this.setState({
           birds: birds.birds
         })
@@ -59,24 +59,42 @@ export default class App extends Component {
       })
     }
 
-    onBirdClick = (e) => {
-      e.preventDefault()
-      let tally = this.addBirds()
-      console.log('Event: ', e.target.id)
-      
-      let newBirds = [...this.state.birds]
-      let bird = newBirds.filter(bird =>
-        bird.commonName === e.target.id)
-      
-      bird[0].sightings ++        
+  onBirdClick = (e) => {
+    e.preventDefault()
+    let tally = this.addBirds()
+    console.log('Event: ', e.target.id)
+    
+    let newBirds = [...this.state.birds]
+    let bird = newBirds.filter(bird =>
+      bird.commonName === e.target.id)
+    
+    bird[0].sightings ++        
 
-      let newChartData = this.state.chartData
-      
-      newChartData.datasets[0].data[0]= tally
-      this.setState({
-        chartData: newChartData
-      })    
-    }
+    let newChartData = this.state.chartData
+    
+    newChartData.datasets[0].data[0]= tally
+    this.setState({
+      chartData: newChartData
+    })    
+  }
+
+  deleteBird(id) {
+    console.log(id)
+  
+    return fetch('https://wildwatcher.herokuapp.com/birds/' + id, {
+      method: 'DELETE'
+    }).then(response => response.json())
+    .catch(err => console.log(err))
+  }
+
+  onDeleteClick = (e) => {
+    e.preventDefault()
+
+    let bird = this.state.birds.filter(bird =>
+    bird.commonName === e.target.id)
+    
+    this.deleteBird(bird[0].id)
+  }
 
   toggleViewAdd = () => {
     this.setState({
@@ -110,7 +128,7 @@ export default class App extends Component {
           toggleAdd={this.toggleViewAdd}
           toggleChart={this.toggleViewChart}
         />
-        {this.state.toggleSearch && <Birds onBirdClick={this.onBirdClick} birds={this.state.birds}/>}
+        {this.state.toggleSearch && <Birds onBirdClick={this.onBirdClick} onDeleteClick={this.onDeleteClick} birds={this.state.birds}/>}
         {this.state.toggleSearch && <Turtles />}
         {this.state.toggleAdd && <Form />}
         {this.state.toggleChart && <Chart chartData={this.state.chartData} legendPosition="bottom"/>}
