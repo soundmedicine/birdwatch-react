@@ -1,5 +1,9 @@
 # birdwatch-react
 
-This is a refactor of the birdwatching application made for Jasper. He's turning six next week.
+This is a React refactor of the birdwatching application made for Jasper, for his sixth birthday. The app allows you to record sightings of native and endemic species of birds and turtles in Colorado. The app also charts how many birds you sighted. `npm start` from the app root directory to run it locally.
 
 Deployed to http://wildwatcher.surge.sh
+Server deployed to https://wildwatcher.herokuapp.com
+Server code at https://github.com/soundmedicine/birdwatch-server
+
+
